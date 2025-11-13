@@ -1,0 +1,526 @@
+{
+    "info": {
+        "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+        "name": "Task API",
+        "description": "API de gestión de tareas y proyectos",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "version": "2.0.0"
+    },
+    "item": [
+        {
+            "name": "Usuarios",
+            "item": [
+                {
+                    "name": "Crear Usuario",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"Juan Pérez\",\n  \"correo\": \"juan@example.com\",\n  \"contraseña\": \"123456\",\n  \"rol\": \"GERENTE_PROYECTO\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/usuarios",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "usuarios"
+                            ]
+                        },
+                        "description": "Crea un nuevo usuario"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Listar Usuarios",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/usuarios",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "usuarios"
+                            ]
+                        },
+                        "description": "Lista todos los usuarios"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Usuario por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/usuarios/{{usuarioId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "usuarios",
+                                "{{usuarioId}}"
+                            ]
+                        },
+                        "description": "Obtiene un usuario por su ID"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Usuario",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"Juan Pérez Actualizado\",\n  \"correo\": \"juan.perez@example.com\",\n  \"rol\": \"ADMINISTRADOR\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/usuarios/{{usuarioId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "usuarios",
+                                "{{usuarioId}}"
+                            ]
+                        },
+                        "description": "Actualiza un usuario. Puedes enviar solo los campos que quieres cambiar:\n\n- Solo nombre: {\"nombre\": \"Nuevo Nombre\"}\n- Solo correo: {\"correo\": \"nuevo@email.com\"}\n- Solo rol: {\"rol\": \"EMPLEADO\"}\n- Múltiples campos: {\"nombre\": \"...\", \"correo\": \"...\"}"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Usuario",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/usuarios/{{usuarioId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "usuarios",
+                                "{{usuarioId}}"
+                            ]
+                        },
+                        "description": "Elimina un usuario"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Autenticar Usuario",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/usuarios/autenticar?correo=juan@example.com&contraseña=123456",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "usuarios",
+                                "autenticar"
+                            ],
+                            "query": [
+                                {
+                                    "key": "correo",
+                                    "value": "juan@example.com"
+                                },
+                                {
+                                    "key": "contraseña",
+                                    "value": "123456"
+                                }
+                            ]
+                        },
+                        "description": "Autentica un usuario"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Proyectos",
+            "item": [
+                {
+                    "name": "Crear Proyecto",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"Aplicacion Clipers\",\n  \"descripcion\": \"Aplicacion web para manejo de empleos similar a Linkedin\",\n  \"fechaCreacion\": \"2025-11-13T00:00:00.000+00:00\",\n  \"fechaFinalizacion\": \"2026-07-31T00:00:00.000+00:00\",\n  \"responsable\": {\n    \"id\": \"{{usuarioId}}\",\n    \"nombre\": \"Juan Pérez\",\n    \"correo\": \"juan@example.com\",\n    \"rol\": \"GERENTE_PROYECTO\"\n  },\n  \"tareas\": []\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/proyectos",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "proyectos"
+                            ]
+                        },
+                        "description": "Crea un nuevo proyecto"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Listar Proyectos",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/proyectos",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "proyectos"
+                            ]
+                        },
+                        "description": "Lista todos los proyectos con sus tareas"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Obtener Proyecto por ID",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/proyectos/{{proyectoId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "proyectos",
+                                "{{proyectoId}}"
+                            ]
+                        },
+                        "description": "Obtiene un proyecto por su ID con todas sus tareas"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Proyecto",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"nombre\": \"Aplicacion Clipers Actualizada\",\n  \"descripcion\": \"Aplicacion web para manejo de empleos similar a Linkedin, con subida de videos procesados con IA\",\n  \"fechaFinalizacion\": \"2026-12-31T00:00:00.000+00:00\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/proyectos/{{proyectoId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "proyectos",
+                                "{{proyectoId}}"
+                            ]
+                        },
+                        "description": "Actualiza un proyecto. Puedes enviar solo los campos que quieres cambiar:\n\n- Solo nombre: {\"nombre\": \"Nuevo Nombre\"}\n- Solo descripción: {\"descripcion\": \"Nueva descripción\"}\n- Solo fecha: {\"fechaFinalizacion\": \"2027-01-31T00:00:00.000+00:00\"}\n- Múltiples campos: {\"nombre\": \"...\", \"descripcion\": \"...\"}"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Proyecto",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/proyectos/{{proyectoId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "proyectos",
+                                "{{proyectoId}}"
+                            ]
+                        },
+                        "description": "Elimina un proyecto.\n\n⚠️ IMPORTANTE: Al eliminar un proyecto, se eliminarán automáticamente TODAS las tareas asociadas (eliminación en cascada)."
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Tareas",
+            "item": [
+                {
+                    "name": "Crear Tarea",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"titulo\": \"Diseñar interfaz de usuario\",\n  \"descripcion\": \"Crear mockups y prototipos de la aplicación\",\n  \"fechaInicio\": \"2025-11-13T00:00:00.000+00:00\",\n  \"fechaEntrega\": \"2025-12-01T00:00:00.000+00:00\",\n  \"estado\": \"PENDIENTE\",\n  \"responsable\": {\n    \"id\": \"{{usuarioId}}\",\n    \"nombre\": \"Juan Pérez\",\n    \"correo\": \"juan@example.com\",\n    \"rol\": \"EMPLEADO\"\n  },\n  \"proyecto\": {\n    \"id\": \"{{proyectoId}}\"\n  }\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/tareas",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "tareas"
+                            ]
+                        },
+                        "description": "Crea una nueva tarea asociada a un proyecto"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Listar Tareas",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/tareas",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "tareas"
+                            ]
+                        },
+                        "description": "Lista todas las tareas"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Actualizar Tarea",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"titulo\": \"Diseñar interfaz de usuario - Actualizado\",\n  \"descripcion\": \"Crear mockups y prototipos con nuevos requisitos\",\n  \"estado\": \"EN_PROGRESO\",\n  \"fechaEntrega\": \"2025-12-15T00:00:00.000+00:00\"\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/tareas/{{tareaId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "tareas",
+                                "{{tareaId}}"
+                            ]
+                        },
+                        "description": "Actualiza una tarea. Puedes enviar solo los campos que quieres cambiar:\n\n- Solo estado: {\"estado\": \"COMPLETADA\"}\n- Solo título: {\"titulo\": \"Nuevo título\"}\n- Solo descripción: {\"descripcion\": \"Nueva descripción\"}\n- Múltiples campos: {\"titulo\": \"...\", \"estado\": \"...\"}"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Tarea",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/tareas/{{tareaId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "tareas",
+                                "{{tareaId}}"
+                            ]
+                        },
+                        "description": "Elimina una tarea"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Asignar Tarea a Usuario",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/tareas/{{tareaId}}/asignar/{{usuarioId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "tareas",
+                                "{{tareaId}}",
+                                "asignar",
+                                "{{usuarioId}}"
+                            ]
+                        },
+                        "description": "Asigna una tarea a un usuario específico"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Notificaciones",
+            "item": [
+                {
+                    "name": "Crear Notificación",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n  \"mensaje\": \"Se te ha asignado una nueva tarea\",\n  \"tipo\": \"NUEVATAREA\",\n  \"destinatario\": {\n    \"id\": \"{{usuarioId}}\",\n    \"nombre\": \"Juan Pérez\",\n    \"correo\": \"juan@example.com\",\n    \"rol\": \"EMPLEADO\"\n  },\n  \"fechaEnvio\": null\n}"
+                        },
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notificaciones",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notificaciones"
+                            ]
+                        },
+                        "description": "Crea una nueva notificación"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Listar Notificaciones",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notificaciones",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notificaciones"
+                            ]
+                        },
+                        "description": "Lista todas las notificaciones"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Eliminar Notificación",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notificaciones/{{notificacionId}}",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notificaciones",
+                                "{{notificacionId}}"
+                            ]
+                        },
+                        "description": "Elimina una notificación"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Enviar Notificación",
+                    "request": {
+                        "method": "POST",
+                        "header": [],
+                        "url": {
+                            "raw": "{{baseUrl}}/api/notificaciones/{{notificacionId}}/enviar",
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "path": [
+                                "api",
+                                "notificaciones",
+                                "{{notificacionId}}",
+                                "enviar"
+                            ]
+                        },
+                        "description": "Envía una notificación al destinatario"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "baseUrl",
+            "value": "http://localhost:8080",
+            "type": "string"
+        },
+        {
+            "key": "usuarioId",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "proyectoId",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "tareaId",
+            "value": "",
+            "type": "string"
+        },
+        {
+            "key": "notificacionId",
+            "value": "",
+            "type": "string"
+        }
+    ]
+}
