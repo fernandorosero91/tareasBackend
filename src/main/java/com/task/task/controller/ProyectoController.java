@@ -3,6 +3,7 @@ package com.task.task.controller;
 import com.task.task.model.Proyecto;
 import com.task.task.service.ProyectoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class ProyectoController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'GERENTE_PROYECTO')")
     public void crearProyecto(@RequestBody Proyecto proyecto) {
         proyectoService.CrearProyecto(proyecto);
     }
@@ -37,11 +39,13 @@ public class ProyectoController {
     }
 
     @DeleteMapping("/{idProyecto}")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'GERENTE_PROYECTO')")
     public void eliminarProyecto(@PathVariable String idProyecto) {
         proyectoService.EliminarProyecto(idProyecto);
     }
 
     @PutMapping("/{idProyecto}")
+    @PreAuthorize("hasAnyRole('ADMINISTRADOR', 'GERENTE_PROYECTO')")
     public Proyecto actualizarProyecto(@RequestBody Proyecto proyecto, @PathVariable String idProyecto) {
         proyectoService.ActualizarProyecto(proyecto, idProyecto);
         return proyectoService.consultarProyectoPorId(idProyecto);

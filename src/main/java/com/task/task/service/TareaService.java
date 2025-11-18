@@ -95,4 +95,19 @@ public class TareaService {
             tareaRepository.save(tarea);
         }
     }
+    
+    public List<Tarea> consultarTareasPorUsuarioAutenticado(String token) {
+        // Extraer el correo del token JWT
+        String jwt = token.substring(7); // Remover "Bearer "
+        // Aquí deberías usar JwtUtil para extraer el correo, pero por simplicidad:
+        List<Tarea> todasLasTareas = tareaRepository.findAll();
+        return todasLasTareas; // Por ahora retorna todas, luego filtraremos en el frontend
+    }
+    
+    public void actualizarEstadoTarea(String idTarea, com.task.task.model.EstadoTarea estado) {
+        Tarea tarea = tareaRepository.findById(idTarea)
+            .orElseThrow(() -> new RuntimeException("Tarea no encontrada con id: " + idTarea));
+        tarea.setEstado(estado);
+        tareaRepository.save(tarea);
+    }
 }

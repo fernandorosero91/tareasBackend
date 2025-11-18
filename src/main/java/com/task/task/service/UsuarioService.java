@@ -87,4 +87,8 @@ public class UsuarioService {
         }
         return null;
     }
+
+    public Usuario consultarUsuarioPorCorreo(String correo) {
+        return usuarioRepository.findByCorreo(correo);
+    }
 }
