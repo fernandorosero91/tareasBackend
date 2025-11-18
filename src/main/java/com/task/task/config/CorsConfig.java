@@ -17,7 +17,7 @@ public class CorsConfig {
         config.setAllowCredentials(true);
         
         // Obtener orígenes permitidos desde variables de entorno
-        String allowedOrigins = System.getenv().getOrDefault("CORS_ALLOWED_ORIGINS", "http://localhost:5173");
+        String allowedOrigins = System.getenv().getOrDefault("CORS_ALLOWED_ORIGINS", "https://tareas-disenio.vercel.app");
         String[] origins = allowedOrigins.split(",");
         
         for (String origin : origins) {
